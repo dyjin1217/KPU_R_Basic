@@ -3,8 +3,8 @@ library(rpart.plot)
 head(iris)
 str(iris)
 
-# ê° ì—´ì— ëŒ€í•œ ë¶„í¬ë„ í™•ì¸
-par(mfrow = c(2, 2)) # ê·¸ë˜í”„ í”„ë ˆì„ ë‚˜ëˆ„ê¸°
+# °¢ ¿­¿¡ ´ëÇÑ ºĞÆ÷µµ È®ÀÎ
+par(mfrow = c(2, 2)) # ±×·¡ÇÁ ÇÁ·¹ÀÓ ³ª´©±â
 
 boxplot(Sepal.Length~Species, data = iris, 
         main = "Sepal.Length") 
@@ -15,18 +15,35 @@ boxplot(Petal.Length~Species, data = iris,
 boxplot(Petal.Length~Species, data = iris, 
         main = "Petal.Width")
 
-point <- as.numeric(iris$Species) # ê° ëª¨ì–‘ ê³ ë¥´ê¸° ìœ„í•´ ì„ ì–¸
-color <- c("red","green","blue") # ê° ì»¬ëŸ¬ ê³ ë¥´ê¸° ìœ„í•´ ì„ ì–¸
-pairs(iris[,-5],      # ìƒê´€ ë¶„ì„ì„ ìœ„í•´ ê° ì—´ ë°ì´í„° ì…ë ¥
-      pch=c(point),   # ê°€ì‹œí™”ë¥¼ ìœ„í•´ ëª¨ì–‘ ì„¤ì •
-      col=color[iris[,5]]  # ê°€ì‹œí™”ë¥¼ ìœ„í•´ ìƒ‰ê¹” ì„¤ì •
+point <- as.numeric(iris$Species) 
+color <- c("red","green","blue")
+pairs(iris[,-5],      # »ó°ü ºĞ¼®À» À§ÇØ °¢ ¿­ µ¥ÀÌÅÍ ÀÔ·Â
+      pch=c(point),   # °¡½ÃÈ­¸¦ À§ÇØ ¸ğ¾ç ¼³Á¤
+      col=color[iris[,5]]  # °¡½ÃÈ­¸¦ À§ÇØ »ö±ò ¼³Á¤
 )
 
-# ê¸°ìˆ í†µê³„ëŸ‰
+# ±â¼úÅë°è·®
 summary(iris)
 summary(iris$Petal.Width)
-unique(iris[,5]) # ì¢…ì˜ ì¢…ë¥˜ ë³´ê¸° (ì¤‘ë³µ ì œê±°)
-table(iris[,"Species"]) # ì¢…ì˜ ì¢…ë¥˜ë³„ instance count
+mean(iris$Petal.Width)
+median(iris$Petal.Width)
+sd(iris$Petal.Width)
+unique(iris[,5]) 
+
+# °ª Ä«¿îÆ® 
+table(iris[,"Species"])
+table(iris$Species)
+
+# Linear Regression
+
+iris2 <- iris
+iris2 <- iris2[iris2$Species == "setosa",]
+y <- iris2$Sepal.Length
+x <- iris2$Sepal.Width
+plot(x,y)
+
+reg_result <- lm(y ~ x) #y = 0.6905x + 2.6390
+abline(reg_result,col="red")
 
 
 # Decision Tree
