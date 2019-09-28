@@ -127,7 +127,7 @@ for(fruit in fruits){
 sum <- 0
 for(i in 1:100)
 {
-   sum <- sum + i
+  sum <- sum + i
 }
 print(sum)
 
@@ -203,8 +203,8 @@ print(N)
 
 sum <- 0
 for(i in 1:9){
-#sum <- sum + (i*i*i)
- sum <- sum + (i^3)
+  #sum <- sum + (i*i*i)
+  sum <- sum + (i^3)
 }
 
 # 2개의 값을 입력 받아 평균을 내는 함수
@@ -253,12 +253,27 @@ calc_three_num(2,3,2)
 
 # 그외 주요 내용
 
+
+# 벡터 생성
 v <- c(1,2,3)
+
+# 벡터의 길이
+length(v)
+
+# names
 names(v) <- c("바나나","사과","귤")
 v["바나나"]
 
-# colnames/rownames
+
+# 행렬 생성
 m <- matrix(c(1,2,3,4),nrow=2)
+
+# 행수, 열수
+
+nrow(m)
+ncol(m)
+
+
 colnames(m) <- c("A","B")
 m[,"A"]
 rownames(m) <- c("C","D")
