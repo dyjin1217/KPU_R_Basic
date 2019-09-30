@@ -11,6 +11,7 @@ X + 2
 X %% 2 == 0 & X %% 3 == 0
 X > 2
 X == 3
+X != 3
 
 # R 데이터 타입연습
 
@@ -48,7 +49,7 @@ A[A %in% c(3,5)]
 
 # 행렬 생성
 V <- c(1,2,3,4)
-A <- matrix(V, nrow=2, byrow=2)
+A <- matrix(V, nrow=2, byrow=TRUE)
 
 # 1~25사이 숫자 생성 및 5*5 행렬 생성
 V <- 1:25
@@ -58,6 +59,7 @@ A[1:3,4:5]
 A[,4:5]
 A[-1,]  
 A[,-(2:3)]
+A[A[,1] > 3, ]
 
 A <- data.frame(숫자=c(1,2,3),과일= c("사과","바나나","배"))
 A[1:2,1:2] # 1~2행, 1~2열
@@ -81,6 +83,10 @@ A <- c("바나나","사과","오렌지")
 A[3] <- "Hello"
 A[3] <- "오렌지"
 
+A <- factor(c("바나나","사과","오렌지"))
+A[3] <- "Hello" # Error
+A[3] <- "사과"
+
 A <- data.frame(숫자=c(1,2,3),과일= c("사과","바나나","배"))
 A <- data.frame(숫자=c(1,2,3),과일= c("사과","바나나","배"),stringsAsFactors=FALSE)
 
@@ -96,6 +102,7 @@ A[,2] <- c(4,1)
 A[1:2,1:2] <- 2
 A[1:2,1:2] <- matrix(c(1,2,3,4),nrow=2)
 
+# 양수/음수 판별
 X <- 7
 if(X>0){
   cat("양수")
@@ -105,7 +112,8 @@ if(X>0){
   cat("음수")
 }
 
-# 성적판단 (80이하 미)
+
+# 성적매기기 (80이하 미)
 X <- as.integer(readline("Input : "))
 
 if(X> 90){
@@ -127,7 +135,7 @@ for(fruit in fruits){
 sum <- 0
 for(i in 1:100)
 {
-  sum <- sum + i
+   sum <- sum + i
 }
 print(sum)
 
@@ -140,7 +148,7 @@ for(i in 1:9){
 }
 
 
-# 1~10 까지 출력
+# 1~10 까지 합을 출력
 i <- 1
 sum <- 0
 while (i <= 100){
@@ -186,6 +194,9 @@ while(1)
     break
 }
 
+
+# 합이 150이상이 되는 첫 N
+
 sum <- 0 
 N <- 1
 while(1)
@@ -203,16 +214,18 @@ print(N)
 
 sum <- 0
 for(i in 1:9){
-  #sum <- sum + (i*i*i)
-  sum <- sum + (i^3)
+#sum <- sum + (i*i*i)
+ sum <- sum + (i^3)
 }
 
 # 2개의 값을 입력 받아 평균을 내는 함수
 
 ave_two <- function(n1,n2)
 {
-  return (n1 + n2)
+  return ((n1+n2)/2)
 }
+
+ave_two(2,3)
 
 # 2개의 값을 입력 받아 큰 수 출력하는 함수 구현
 
@@ -253,27 +266,12 @@ calc_three_num(2,3,2)
 
 # 그외 주요 내용
 
-
-# 벡터 생성
 v <- c(1,2,3)
-
-# 벡터의 길이
-length(v)
-
-# names
 names(v) <- c("바나나","사과","귤")
 v["바나나"]
 
-
-# 행렬 생성
+# colnames/rownames
 m <- matrix(c(1,2,3,4),nrow=2)
-
-# 행수, 열수
-
-nrow(m)
-ncol(m)
-
-
 colnames(m) <- c("A","B")
 m[,"A"]
 rownames(m) <- c("C","D")
@@ -292,7 +290,6 @@ v == 1
 which(v == 1)
 
 # paste 
-
 paste("apple", "banana", "orange",sep=" ")
 
 # sort 
@@ -317,13 +314,15 @@ names(score)[score == max(score)]
 
 a <- matrix(1:12,nrow=3)
 apply(a,1,max)
-rowSums(a)
 apply(a,2,max)
+
+apply(a,1,sum)
+rowSums(a)
+apply(a,2,sum)
 colSums(a)
 
 # R통계량 연습문제 (행렬)
 
-#m <- matrix(1:25,nrow=5,byrow=T)
 m <- matrix(1:25,nrow=5,byrow=T)
 apply(m,1,sum)
 apply(m,2,sum)
@@ -360,7 +359,7 @@ A <- round(runif(100, min = 0,max = 100),0)
 hist(A)
 hist(A,main="")
 title(main="Histogram")
-text()
+text(40,10,"Hello")
 
 # Boxplot
 A <- round(runif(100, min = 0,max = 100),0)
